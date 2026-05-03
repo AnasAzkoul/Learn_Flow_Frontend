@@ -12,6 +12,7 @@ interface Props extends PrimitiveProps {
   size?: ButtonVariants["size"];
   class?: HTMLAttributes["class"];
   to?: RouteLocationRaw;
+  href?: string;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -34,6 +35,9 @@ const props = withDefaults(defineProps<Props>(), {
     >
       <slot />
     </NuxtLink>
+    <a v-else-if="href">
+      <slot />
+    </a>
     <slot v-else />
   </Primitive>
 </template>

@@ -15,6 +15,7 @@
 
   /* Core Colors - mapped from CSS vars */
   --color-background: var(--background);
+  --color-background-hover: var(--border-hover);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
