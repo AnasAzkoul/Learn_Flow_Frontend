@@ -1,43 +1,36 @@
 import pluginVue from "eslint-plugin-vue";
 import vueParser from "vue-eslint-parser";
 import tsParser from "@typescript-eslint/parser";
+
 export default [
-	...pluginVue.configs["flat/recommended"],
-	{
-		files: ["**/*.vue"],
-		languageOptions: {
-			parser: vueParser,
-			parserOptions: {
+	...pluginVue.configs["flat/recommended"], {
+		files: ["**/*.vue"], languageOptions: {
+			parser: vueParser, parserOptions: {
 				parser: tsParser, // handles <script lang="ts"> inside .vue files
 			},
 		},
-	},
-	{
-		files: ["**/*.ts"],
-		languageOptions: {
+	}, {
+		files: ["**/*.ts"], languageOptions: {
 			parser: tsParser,
 		},
-	},
-	{
+	}, {
 		rules: {
 			"vue/attributes-order": [
-				"error",
-				{
+				"error", {
 					order: [
-						"DEFINITION",
-						"LIST_RENDERING",
-						"CONDITIONALS",
-						"RENDER_MODIFIERS",
-						"GLOBAL",
-						"UNIQUE",
-						"TWO_WAY_BINDING",
-						"OTHER_DIRECTIVES",
-						"OTHER_ATTR",
-						"EVENTS",
-						"CONTENT",
-					],
-					alphabetical: false,
+						"DEFINITION", "LIST_RENDERING", "CONDITIONALS", "RENDER_MODIFIERS",
+						"GLOBAL", "UNIQUE", "TWO_WAY_BINDING", "OTHER_DIRECTIVES",
+						"OTHER_ATTR", "EVENTS", "CONTENT",
+					], alphabetical: false,
 				},
+			], "vue/html-indent": ["warn", 2], "vue/max-attributes-per-line": [
+				"warn", {
+					singleline: 3, multiline: 1,
+				}
+			], "vue/first-attribute-linebreak": [
+				"warn", {
+					singleline: "beside", multiline: "below",
+				}
 			],
 		},
 	},
