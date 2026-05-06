@@ -1,59 +1,28 @@
 <script lang="ts" setup>
-import {ref} from "vue";
 import Button from "@/components/ui/button/Button.vue";
-
-const router = useRouter();
-const query = ref("");
-
-function handleSubmit() {
-  router.push("/new-course");
-}
 </script>
 
 <template>
-  <section class="relative bg-bg px-6 py-20 sm:px-12 md:py-28 overflow-hidden">
-    <div aria-hidden="true" class="absolute inset-0 hero-glow-light" />
-    <div class="relative mx-auto max-w-3xl text-center space-y-8">
-      <!-- Eyebrow -->
-      <div class="flex items-center justify-center gap-4 reveal">
-        <div class="h-px w-10 bg-primary/40" />
-        <span class="mono-space text-primary">BEGIN_TRANSMISSION</span>
-        <div class="h-px w-10 bg-primary/40" />
-      </div>
+  <section class="relative py-28 md:py-36 px-6 md:px-10 bg-esp-900 overflow-hidden">
+    <!-- Ember glow -->
+    <div
+      aria-hidden="true"
+      class="absolute inset-0 pointer-events-none"
+      style="background: radial-gradient(ellipse 70% 50% at 50% 50%, rgba(232, 87, 26, 0.16) 0%, transparent 60%)"
+    />
 
-      <!-- Heading -->
-      <h2 class="display-text text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-text-main reveal reveal-delay-1">
-        WHAT DO YOU WANT
-        <br>
-        <span class="text-primary">TO LEARN?</span>
+    <div class="relative max-w-[800px] mx-auto text-center">
+      <h2
+        class="text-text-on-dark mb-10"
+        style="font-family: var(--font-display); font-size: clamp(2.5rem, 5.5vw, 4.5rem); font-weight: 700; line-height: 1.0; letter-spacing: -0.04em"
+      >
+        Start learning.<br />
+        <span class="text-primary">Your way.</span>
       </h2>
 
-      <!-- Command bar -->
-      <form
-        class="flex items-stretch gap-0 max-w-2xl mx-auto reveal reveal-delay-2"
-        @submit.prevent="handleSubmit"
-      >
-        <div class="flex flex-1 items-center gap-3 bg-white border border-border rounded-l-xl px-5 py-4">
-          <span class="font-mono text-primary text-lg shrink-0">&gt;</span>
-          <input
-            v-model="query"
-            class="w-full bg-transparent text-text-main placeholder:text-text-muted font-mono text-sm outline-none"
-            placeholder="e.g. orbital mechanics from Newton to rocket equations"
-            type="text"
-          >
-        </div>
-        <Button
-          class="shrink-0 bg-primary hover:bg-accent-hover text-white font-display font-semibold text-sm uppercase tracking-wider px-6 rounded-r-xl transition-colors duration-200"
-          type="submit"
-        >
-          Generate →
-        </Button>
-      </form>
-
-      <!-- Trust signal -->
-      <p class="mono-space text-text-muted reveal reveal-delay-3">
-        FREE · NO CREDIT CARD · UNLIMITED COURSES DURING BETA
-      </p>
+      <Button variant="default" size="lg" class="font-display font-semibold text-base px-8">
+        Get started free →
+      </Button>
     </div>
   </section>
 </template>

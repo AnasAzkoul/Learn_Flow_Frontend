@@ -59,7 +59,7 @@ const modules: Module[] = [
 const codeSegments: CodeSegment[] = [
   {text: 'fruits', cls: 'text-text-on-dark'},
   {text: ' = ', cls: 'text-text-on-dark-sec'},
-  {text: '["apple", "banana", "cherry"]', cls: 'text-[#c6890e]'},
+  {text: '["apple", "banana", "cherry"]', cls: 'text-warning'},
   {text: '\n\n'},
   {text: 'for', cls: 'text-primary font-semibold'},
   {text: ' fruit '},
@@ -68,7 +68,7 @@ const codeSegments: CodeSegment[] = [
   {text: '    '},
   {text: 'print', cls: 'text-primary'},
   {text: '('},
-  {text: 'f"I like {fruit}"', cls: 'text-[#c6890e]'},
+  {text: 'f"I like {fruit}"', cls: 'text-warning'},
   {text: ')\n\n'},
   {text: '# Output:', cls: 'text-esp-500'},
   {text: '\n'},
@@ -110,7 +110,7 @@ const quizOptions = [
     <!-- Mock browser panel -->
     <div class="bg-esp-900 rounded-2xl overflow-hidden reveal reveal-delay-1">
       <!-- Browser chrome -->
-      <div class="flex items-center gap-1.5 px-5 py-3 border-b border-white/[0.04] bg-esp-700">
+      <div class="flex items-center gap-1.5 px-5 py-3 border-b border-esp-700 bg-esp-700">
         <div class="size-[9px] rounded-full bg-[#ff5f57]" />
         <div class="size-[9px] rounded-full bg-[#febc2e]" />
         <div class="size-[9px] rounded-full bg-[#28c840]" />
@@ -125,7 +125,7 @@ const quizOptions = [
       <!-- Three-column layout -->
       <div class="flex min-h-[400px] lg:min-h-[520px]">
         <!-- Left sidebar: Course outline -->
-        <div class="hidden lg:flex flex-col w-[220px] shrink-0 border-r border-white/[0.06] bg-esp-800 p-4">
+        <div class="hidden lg:flex flex-col w-[220px] shrink-0 border-r border-esp-700 bg-esp-800 p-4">
           <!-- Course info -->
           <div class="mb-5">
             <span class="font-mono text-[9px] tracking-widest text-primary uppercase">
@@ -186,7 +186,7 @@ const quizOptions = [
           </div>
 
           <!-- Progress -->
-          <div class="mt-4 pt-4 border-t border-white/[0.06]">
+          <div class="mt-4 pt-4 border-t border-esp-700">
             <span class="font-mono text-[9px] tracking-widest text-text-on-dark-mut uppercase block mb-2">
               PROGRESS
             </span>
@@ -229,7 +229,7 @@ const quizOptions = [
 
           <!-- Code block -->
           <div class="bg-esp-800 rounded-lg overflow-hidden mb-6">
-            <div class="flex items-center justify-between px-4 py-2 border-b border-white/[0.06]">
+            <div class="flex items-center justify-between px-4 py-2 border-b border-esp-700">
               <span class="font-mono text-[10px] text-text-on-dark-mut tracking-wider uppercase">
                 Python
               </span>
@@ -260,7 +260,7 @@ const quizOptions = [
                 :class="
                   option.correct
                     ? 'border-success/40 bg-success/[0.08]'
-                    : 'border-white/[0.06] bg-esp-700/50'
+                    : 'border-esp-700 bg-esp-700/50'
                 "
                 class="flex items-center gap-2.5 px-3 py-2 rounded-md border transition-colors"
               >
@@ -268,7 +268,7 @@ const quizOptions = [
                   :class="
                     option.correct
                       ? 'border-success bg-success'
-                      : 'border-white/10'
+                      : 'border-esp-700'
                   "
                   class="size-4 rounded-full border flex items-center justify-center shrink-0"
                 >
@@ -290,9 +290,9 @@ const quizOptions = [
         </div>
 
         <!-- Right sidebar: AI Q&A panel -->
-        <div class="hidden md:flex flex-col w-[260px] shrink-0 border-l border-white/[0.06] bg-esp-800">
+        <div class="hidden md:flex flex-col w-[260px] shrink-0 border-l border-esp-700 bg-esp-800">
           <!-- Panel header -->
-          <div class="px-4 py-3 border-b border-white/[0.06]">
+          <div class="px-4 py-3 border-b border-esp-700">
             <div class="flex items-center gap-2">
               <div class="size-5 rounded-full bg-primary flex items-center justify-center">
                 <span class="text-white text-[9px] font-bold">AI</span>
@@ -370,7 +370,7 @@ const quizOptions = [
           </div>
 
           <!-- Input (decorative) -->
-          <div class="p-3 border-t border-white/[0.06]">
+          <div class="p-3 border-t border-esp-700">
             <div class="bg-esp-700 rounded-lg px-3 py-2 flex items-center gap-2">
               <span class="text-primary text-xs">&#8250;</span>
               <span class="font-mono text-[10px] text-text-on-dark-mut flex-1">

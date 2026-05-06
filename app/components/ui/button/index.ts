@@ -21,8 +21,6 @@ export const buttonVariants = cva(
         link: "text-primary underline-offset-4 hover:underline",
         generate:
           "w-full bg-esp-900 text-text-on-dark border border-esp-700 hover:bg-esp-800 hover:border-primary/40 hover:shadow-accent transition-all duration-300",
-        "primary-gradient":
-          "bg-gradient-to-r from-primary to-accent text-white shadow-button-glow hover:brightness-110 transition-all duration-300",
       },
       size: {
         "sm": "h-8 rounded-md gap-1.5 px-3 text-sm",

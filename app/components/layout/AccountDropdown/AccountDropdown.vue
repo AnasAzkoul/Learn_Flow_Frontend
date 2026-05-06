@@ -17,7 +17,6 @@ const userDropdownItems: UserDropdownItem[] = [
 ]
 
 function handleLogout() {
-  console.log("Logout clicked");
 }
 </script>
 

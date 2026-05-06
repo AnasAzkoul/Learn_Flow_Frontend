@@ -1,136 +1,227 @@
 <script lang="ts" setup>
-import {Button} from "@/components/ui/button";
+import {ref, onMounted, onUnmounted} from "vue";
+import Button from "@/components/ui/button/Button.vue";
+import CourseCardShowcase from "./CourseCardShowcase.vue";
+
+const phrases = [
+  {lead: 'Learn anything,', accent: 'on your own terms.'},
+  {lead: 'Personal courses', accent: 'built only for you.'},
+  {lead: 'Master your craft —', accent: 'learn your way.'},
+  {lead: 'From a sentence', accent: 'to a syllabus.'},
+];
+
+const topics = [
+  'organic chemistry — at my pace',
+  'medieval architecture, deeply',
+  'systems design for staff eng',
+  'quantum mechanics from scratch',
+  'how typography really works',
+];
+
+const phraseIdx = ref(0);
+const topicIdx = ref(0);
+
+let phraseTimer: ReturnType<typeof setInterval>;
+let topicTimer: ReturnType<typeof setInterval>;
+
+onMounted(() => {
+  phraseTimer = setInterval(() => {
+    phraseIdx.value = (phraseIdx.value + 1) % phrases.length;
+  }, 4200);
+  topicTimer = setInterval(() => {
+    topicIdx.value = (topicIdx.value + 1) % topics.length;
+  }, 2800);
+});
+
+onUnmounted(() => {
+  clearInterval(phraseTimer);
+  clearInterval(topicTimer);
+});
+
+function setPhrase(i: number) {
+  phraseIdx.value = i;
+}
 </script>
 
 <template>
-  <section class="relative bg-esp-900 pt-36 pb-24 text-center overflow-hidden">
-    <!-- Radial glow layer -->
-    <div
-      aria-hidden="true"
-      class="absolute inset-0 hero-glow"
-    />
+  <section class="relative mt-[72px] min-h-[calc(100vh-72px)] overflow-hidden">
+    <!-- Background split: left parchment, right dark -->
+    <div aria-hidden="true" class="absolute inset-0 lg:grid lg:grid-cols-2 pointer-events-none">
+      <div class="bg-bg" />
+      <div style="background: linear-gradient(135deg, var(--esp-900) 0%, var(--esp-800) 60%, #0e1116 100%)" />
+    </div>
 
-    <!-- Bottom fade to page background -->
-    <div
-      aria-hidden="true"
-      class="absolute bottom-0 inset-x-0 h-20 bg-gradient-to-b from-transparent to-bg"
-    />
+    <div class="relative max-w-[1400px] mx-auto px-6 md:px-10 grid lg:grid-cols-[1.1fr_1fr] min-h-[calc(100vh-72px)]">
+      <!-- LEFT — content on parchment -->
+      <div class="relative py-16 lg:py-20 flex flex-col justify-center">
+        <!-- Dot grid overlay -->
+        <div aria-hidden="true" class="absolute inset-0 dot-grid opacity-70 pointer-events-none" />
+        <div class="relative max-w-[560px]">
+          <!-- Rotating headline -->
+          <h1
+            class="mb-7 h-[3em]"
+            style="font-family: var(--font-display); font-size: clamp(2.75rem, 5.5vw, 5rem); font-weight: 700; line-height: 1.0; letter-spacing: -0.045em; color: var(--esp-900)"
+          >
+            <div :key="'lead-' + phraseIdx" style="animation: heroPhraseIn 700ms var(--hearth-ease) both">
+              {{ phrases[phraseIdx]?.lead }}
+            </div>
+            <div
+              :key="'accent-' + phraseIdx"
+              class="italic text-primary"
+              style="font-family: var(--font-sans); font-weight: 500; animation: heroPhraseIn 700ms var(--hearth-ease) 120ms both"
+            >
+              {{ phrases[phraseIdx]?.accent }}
+            </div>
+          </h1>
 
-    <!-- Content -->
-    <div class="relative max-w-3xl mx-auto space-y-6">
-      <!-- Eyebrow -->
-      <span class="font-display text-xs font-semibold uppercase tracking-[0.1em] text-primary block reveal">
-        AI-Powered Courses
-      </span>
+          <!-- Carousel dots -->
+          <div class="flex gap-2 mb-8">
+            <button
+              v-for="(_, i) in phrases"
+              :key="i"
+              :aria-label="'Phrase ' + (i + 1)"
+              :class="i === phraseIdx ? 'w-7 bg-primary' : 'w-2 bg-border'"
+              class="h-2 rounded-full border-0 p-0 cursor-pointer transition-all duration-[400ms]"
+              style="transition-timing-function: var(--hearth-ease)"
+              @click="setPhrase(i)"
+            />
+          </div>
 
-      <!-- Heading -->
-      <h1 class="display-text text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight text-text-on-dark reveal reveal-delay-1">
-        Your curriculum. Your pace.
-        <br>
-        <span class="text-primary">An AI that teaches.</span>
-      </h1>
+          <!-- Body text -->
+          <p class="text-text-sec text-xl leading-relaxed mb-10 max-w-[520px]" style="font-family: var(--font-sans)">
+            Tell LearnFlow what you want to master. An agentic pipeline drafts a structured course — modules, sequence,
+            depth — calibrated to your exact level in under five seconds.
+          </p>
 
-      <!-- Body -->
-      <p class="text-base md:text-lg text-text-on-dark-sec max-w-[460px] mx-auto leading-relaxed reveal reveal-delay-2">
-        Tell us what you want to learn. Our AI builds a structured, personalized
-        course — calibrated to your level, ready in seconds.
-      </p>
+          <!-- CTA buttons -->
+          <div class="flex flex-wrap gap-3 mb-12">
+            <Button class="font-display font-semibold" size="lg" variant="default">
+              Start learning free →
+            </Button>
+            <Button class="font-display font-semibold" size="lg" variant="ghost">
+              See how it works
+            </Button>
+          </div>
 
-      <!-- Trust signal -->
-      <div class="flex items-center justify-center gap-2 flex-wrap reveal reveal-delay-3">
-        <span class="text-xs text-text-on-dark-mut font-display">People are learning</span>
-        <span class="text-xs text-text-on-dark-mut">→</span>
-        <div class="flex items-center gap-1.5">
-          <span class="px-2.5 py-1 rounded-full bg-esp-800 border border-esp-700 text-primary text-xs font-display font-semibold">Python</span>
-          <span class="px-2.5 py-1 rounded-full bg-esp-800 border border-esp-700 text-primary text-xs font-display font-semibold">System Design</span>
-          <span class="px-2.5 py-1 rounded-full bg-esp-800 border border-esp-700 text-primary text-xs font-display font-semibold">React</span>
+          <!-- Try-it bar -->
+          <div class="bg-bg-card rounded-xl border border-border p-5 shadow-md">
+            <div class="flex justify-between mono-space text-text-muted tracking-[0.16em] text-[0.65rem] mb-3">
+              <span>I want to learn…</span>
+              <span class="text-primary hidden sm:inline">⌘ + ↵ to generate</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="flex-1 h-[52px] px-4 bg-bg-alt border border-border rounded-lg flex items-center overflow-hidden">
+                <span
+                  :key="topicIdx"
+                  class="text-text-main"
+                  style="font-family: var(--font-sans); font-size: 1.0625rem; animation: heroTopicIn 600ms var(--hearth-ease) both"
+                >
+                  {{ topics[topicIdx] }}
+                </span>
+                <span
+                  class="inline-block w-0.5 h-5 bg-primary ml-1 shrink-0"
+                  style="animation: heroCaret 1.05s steps(2) infinite"
+                />
+              </div>
+              <Button class="font-display font-semibold shrink-0" size="md" variant="default">
+                Generate
+              </Button>
+            </div>
+          </div>
+
+          <!-- Micro-stats -->
+          <div class="mt-9 flex gap-10 flex-wrap">
+            <div
+              v-for="stat in [
+                {value: '14,206', label: 'courses generated'},
+                {value: '4.2s', label: 'median build'},
+                {value: '97%', label: 'completion'},
+              ]"
+              :key="stat.label"
+            >
+              <span class="block font-display text-base font-semibold text-text-main tracking-tight">{{
+                stat.value
+              }}</span>
+              <span class="mono-space text-text-muted tracking-[0.14em]">{{ stat.label }}</span>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- CTA Buttons -->
-      <div class="flex items-center justify-center pt-2 reveal reveal-delay-4">
-        <Button
-          class="rounded-lg font-display font-semibold h-13 px-8 text-lg"
-          size="lg"
-          to="/new-course"
-          variant="default"
+      <!-- RIGHT — dark atmospheric stage -->
+      <div class="relative hidden lg:flex items-center justify-center overflow-hidden py-20 pl-8">
+        <!-- Ember glow -->
+        <div
+          aria-hidden="true"
+          class="absolute inset-0 pointer-events-none"
+          style="background: radial-gradient(ellipse 60% 50% at 30% 40%, rgba(232, 87, 26, 0.18) 0%, transparent 60%)"
+        />
+        <!-- Dot grid -->
+        <div aria-hidden="true" class="absolute inset-0 dot-grid-dark pointer-events-none" />
+
+        <!-- Ambient orbits -->
+        <svg
+          aria-hidden="true"
+          class="absolute inset-0 pointer-events-none opacity-40"
+          height="100%"
+          preserveAspectRatio="none"
+          viewBox="0 0 600 800"
+          width="100%"
         >
-          Start learning →
-        </Button>
-      </div>
+          <circle
+            v-for="(r, i) in [120, 200, 280]"
+            :key="i"
+            :r="r"
+            :stroke-dasharray="`${4 + i * 2} ${10 + i * 4}`"
+            cx="300"
+            cy="400"
+            fill="none"
+            stroke="rgba(232, 87, 26, 0.25)"
+            stroke-width="1"
+          >
+            <animateTransform
+              :dur="`${40 + i * 20}s`"
+              :from="`0 300 400`"
+              :to="`${i % 2 === 0 ? 360 : -360} 300 400`"
+              attributeName="transform"
+              repeatCount="indefinite"
+              type="rotate"
+            />
+          </circle>
+        </svg>
 
-      <!-- Product preview mockup -->
-      <div class="bg-esp-800 border border-esp-700 rounded-[var(--radius-md)] max-w-xl mx-auto mt-4 text-left overflow-hidden reveal reveal-delay-5">
-        <!-- Card header -->
-        <div class="flex items-center justify-between px-5 py-4 border-b border-esp-700">
-          <div class="flex items-center gap-3">
-            <div class="w-8 h-8 rounded-lg bg-esp-700 border border-esp-600 flex items-center justify-center shrink-0">
-              <span class="text-primary text-sm">✦</span>
-            </div>
-            <div>
-              <p class="font-display text-sm font-semibold text-text-on-dark">
-                Introduction to Machine Learning
-              </p>
-              <p class="text-xs text-text-on-dark-mut">
-                6 modules · Beginner
-              </p>
-            </div>
-          </div>
-          <span class="px-2.5 py-1 rounded-full bg-esp-700 border border-esp-600 text-primary text-xs font-display font-semibold shrink-0 ml-3">
-            AI Generated
-          </span>
+        <!-- Floating chips -->
+        <div
+          v-for="(chip, i) in [
+            {text: '◐ Calibrating depth · 87%', pos: 'top-[12%] left-[8%]', ember: true, dur: '6s', delay: '0s'},
+            {text: '▪ 6 modules drafted', pos: 'top-[18%] right-[10%]', ember: false, dur: '7s', delay: '1.2s'},
+            {text: '✓ Tuned to YOU · expert', pos: 'bottom-[14%] left-[6%]', ember: false, dur: '5.4s', delay: '0.6s'},
+            {text: '↪ Branching curriculum', pos: 'bottom-[10%] right-[8%]', ember: true, dur: '6.4s', delay: '0.4s'},
+          ]"
+          :key="i"
+          :class="['absolute', chip.pos]"
+          :style="{
+            background: 'rgba(31, 36, 43, 0.7)',
+            backdropFilter: 'blur(10px)',
+            border: chip.ember ? '1px solid rgba(232, 87, 26, 0.3)' : '1px solid rgba(238, 240, 244, 0.15)',
+            color: chip.ember ? 'var(--primary)' : 'var(--text-on-dark-sec)',
+            animation: `heroFloat ${chip.dur} ease-in-out ${chip.delay} infinite`,
+          }"
+          class="px-3.5 py-2 rounded-full mono-space text-[0.65rem] tracking-[0.16em]"
+        >
+          {{ chip.text }}
         </div>
 
-        <!-- Module rows -->
-        <div class="divide-y divide-esp-700">
-          <div class="flex items-center gap-4 px-5 py-3.5">
-            <span class="w-6 h-6 rounded-md bg-primary flex items-center justify-center text-white text-xs font-display font-bold shrink-0">1</span>
-            <div class="flex-1 min-w-0">
-              <p class="text-sm font-display font-medium text-text-on-dark">
-                What is Machine Learning?
-              </p>
-              <p class="text-xs text-text-on-dark-mut">
-                Concepts · 8 min
-              </p>
-            </div>
-            <div class="w-16 h-1.5 rounded-full bg-esp-700 overflow-hidden shrink-0">
-              <div class="h-full w-full bg-primary rounded-full" />
-            </div>
-          </div>
-          <div class="flex items-center gap-4 px-5 py-3.5">
-            <span class="w-6 h-6 rounded-md bg-esp-700 flex items-center justify-center text-text-on-dark-mut text-xs font-display font-bold shrink-0">2</span>
-            <div class="flex-1 min-w-0">
-              <p class="text-sm font-display font-medium text-text-on-dark">
-                Supervised vs Unsupervised
-              </p>
-              <p class="text-xs text-text-on-dark-mut">
-                Theory · 12 min
-              </p>
-            </div>
-            <div class="w-16 h-1.5 rounded-full bg-esp-700 overflow-hidden shrink-0">
-              <div class="h-full w-1/2 bg-primary rounded-full" />
-            </div>
-          </div>
-          <div class="flex items-center gap-4 px-5 py-3.5 opacity-50">
-            <span class="w-6 h-6 rounded-md bg-esp-700 flex items-center justify-center text-text-on-dark-mut text-xs font-display font-bold shrink-0">3</span>
-            <div class="flex-1 min-w-0">
-              <p class="text-sm font-display font-medium text-text-on-dark">
-                Your First Model in Python
-              </p>
-              <p class="text-xs text-text-on-dark-mut">
-                Hands-on · 20 min
-              </p>
-            </div>
-            <div class="w-16 h-1.5 rounded-full bg-esp-700 shrink-0" />
-          </div>
-        </div>
-
-        <!-- Card footer -->
-        <div class="px-5 py-3 bg-esp-900 flex items-center justify-between border-t border-esp-700">
-          <span class="text-xs text-text-on-dark-mut font-display">3 more modules</span>
-          <span class="mono-space text-text-on-dark-mut">Generated in 3.2s</span>
+        <!-- Course card -->
+        <div class="relative z-[1]">
+          <CourseCardShowcase />
         </div>
       </div>
+    </div>
+
+    <!-- Mobile course card preview -->
+    <div class="lg:hidden px-6 pb-12 -mt-4">
+      <CourseCardShowcase />
     </div>
   </section>
 </template>

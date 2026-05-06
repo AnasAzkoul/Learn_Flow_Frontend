@@ -1,0 +1,183 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-05-04T00:00:00Z",
+  "title": "Design System: LearnFlow",
+  "extensions": {
+    "colorMeta": {
+      "ember": {
+        "role": "primary",
+        "displayName": "Ember",
+        "canonical": "oklch(62% 0.21 35)",
+        "tonalRamp": ["#3d1508", "#5c1f0c", "#7a2a10", "#993514", "#b84118", "#e8571a", "#f0804d", "#f5a880", "#fad0b3", "#fde8d9"]
+      },
+      "ember-hover": {
+        "role": "primary",
+        "displayName": "Ember Hover",
+        "canonical": "oklch(58% 0.20 34)",
+        "tonalRamp": ["#371207", "#531b0b", "#70240f", "#8c2e13", "#a93717", "#d44e15", "#df7448", "#e99a7b", "#f3c0ae", "#f9dfd7"]
+      },
+      "warm-parchment": {
+        "role": "neutral",
+        "displayName": "Warm Parchment",
+        "canonical": "oklch(97.5% 0.005 80)",
+        "tonalRamp": ["#1a1310", "#2a201a", "#3d3028", "#564538", "#7a6b5d", "#a99e92", "#c4bbb0", "#ddd7cf", "#f3f1eb", "#faf9f5"]
+      },
+      "linen": {
+        "role": "neutral",
+        "displayName": "Linen",
+        "canonical": "oklch(95% 0.008 80)",
+        "tonalRamp": ["#1a1310", "#2a201a", "#3d3028", "#564538", "#7a6b5d", "#a99e92", "#c4bbb0", "#ddd7cf", "#f3f1eb", "#faf9f5"]
+      },
+      "espresso": {
+        "role": "neutral",
+        "displayName": "Espresso",
+        "canonical": "oklch(18% 0.02 55)",
+        "tonalRamp": ["#0d0a08", "#1a1310", "#2a201a", "#3d3028", "#564538", "#7a6b5d", "#a99e92", "#c4bbb0", "#ddd7cf", "#f3f1eb"]
+      },
+      "moss": {
+        "role": "status",
+        "displayName": "Moss",
+        "canonical": "oklch(58% 0.10 145)",
+        "tonalRamp": ["#1a2d1b", "#2a472c", "#3a613d", "#4a7b4e", "#5a8a5e", "#7aa37d", "#9abc9c", "#bad5bb", "#daedda", "#edf6ed"]
+      },
+      "goldenrod": {
+        "role": "status",
+        "displayName": "Goldenrod",
+        "canonical": "oklch(65% 0.15 85)",
+        "tonalRamp": ["#2e2003", "#4d3505", "#6d4b07", "#8c6009", "#ac760c", "#c6890e", "#d4a23e", "#e2bb6e", "#efd49e", "#f7ecce"]
+      },
+      "brick-red": {
+        "role": "status",
+        "displayName": "Brick Red",
+        "canonical": "oklch(50% 0.17 25)",
+        "tonalRamp": ["#2d0b07", "#4a120c", "#671a11", "#842116", "#a1291b", "#c0392b", "#cd6155", "#da897f", "#e7b1a9", "#f3d8d3"]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero headlines and section anchors. Sora at maximum weight and negative tracking." },
+      "headline": { "displayName": "Headline", "purpose": "Section headings and feature titles." },
+      "title": { "displayName": "Title", "purpose": "Card headings and subsection labels." },
+      "body": { "displayName": "Body", "purpose": "Long-form content and descriptions. Source Serif 4 for reading comfort." },
+      "label": { "displayName": "Label", "purpose": "Technical annotations, step indicators, metadata. JetBrains Mono uppercase." }
+    },
+    "shadows": [
+      { "name": "ambient-low", "value": "0 1px 2px rgba(26, 19, 16, 0.04)", "purpose": "Default card and surface elevation." },
+      { "name": "ambient-medium", "value": "0 4px 12px rgba(26, 19, 16, 0.06)", "purpose": "Popovers, dropdowns, modals at rest." },
+      { "name": "ambient-high", "value": "0 12px 32px rgba(26, 19, 16, 0.1)", "purpose": "Elevated panels, monolith mockups." },
+      { "name": "ember-glow", "value": "0 4px 16px rgba(232, 87, 26, 0.2)", "purpose": "Accent shadow for primary CTAs on hover." },
+      { "name": "bar", "value": "0 8px 36px rgba(26, 19, 16, 0.22)", "purpose": "Command-bar CTA floating shadow." },
+      { "name": "bar-focus", "value": "0 14px 48px rgba(26, 19, 16, 0.3), 0 0 0 2px rgba(232, 87, 26, 0.1)", "purpose": "Command bar in focus state." },
+      { "name": "pill", "value": "0 6px 28px rgba(26, 19, 16, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.04)", "purpose": "Floating pill elements with top-lit highlight." },
+      { "name": "inner-glow", "value": "inset 0 1px 0 rgba(255, 255, 255, 0.05)", "purpose": "Inner highlight on dark surface elements." }
+    ],
+    "motion": [
+      { "name": "hearth-ease", "value": "cubic-bezier(0.25, 0.46, 0.45, 0.94)", "purpose": "System-standard easing for state transitions." },
+      { "name": "hearth-spring", "value": "cubic-bezier(0.34, 1.56, 0.64, 1)", "purpose": "Overshoot spring for playful micro-interactions. Use sparingly." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" },
+      { "name": "2xl", "value": "1536px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The ember CTA. Used for primary actions: signups, course generation, key navigation.",
+      "html": "<button class=\"ds-btn-primary\">Start learning</button>",
+      "css": ".ds-btn-primary { background: #e8571a; color: #ffffff; padding: 0 16px; height: 36px; font-family: 'Source Serif 4', Georgia, serif; font-size: 0.875rem; font-weight: 500; border: none; border-radius: 12px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px; transition: all 200ms ease-in; } .ds-btn-primary:hover { background: rgba(232, 87, 26, 0.9); } .ds-btn-primary:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(232, 87, 26, 0.5); }"
+    },
+    {
+      "name": "Generate Button",
+      "kind": "button",
+      "refersTo": "button-generate",
+      "description": "Dark inverse button for the command-bar CTA and generation actions.",
+      "html": "<button class=\"ds-btn-generate\">Generate course</button>",
+      "css": ".ds-btn-generate { background: #1a1310; color: #f5f0ea; padding: 0 16px; height: 36px; font-family: 'Source Serif 4', Georgia, serif; font-size: 0.875rem; font-weight: 500; border: 1px solid #3d3028; border-radius: 12px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px; transition: all 300ms ease-in; } .ds-btn-generate:hover { background: #2a201a; border-color: rgba(232, 87, 26, 0.4); box-shadow: 0 4px 16px rgba(232, 87, 26, 0.2); } .ds-btn-generate:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(232, 87, 26, 0.5); }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Transparent button for secondary actions in navigation and toolbars.",
+      "html": "<button class=\"ds-btn-ghost\">Learn more</button>",
+      "css": ".ds-btn-ghost { background: transparent; color: #1a1310; padding: 0 16px; height: 36px; font-family: 'Source Serif 4', Georgia, serif; font-size: 0.875rem; font-weight: 500; border: none; border-radius: 12px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px; transition: all 200ms ease-in; } .ds-btn-ghost:hover { background: #f3f1eb; } .ds-btn-ghost:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(232, 87, 26, 0.5); }"
+    },
+    {
+      "name": "Hearth Card",
+      "kind": "card",
+      "refersTo": "card-default",
+      "description": "Default content card with warm shadow and light border.",
+      "html": "<div class=\"ds-card\"><h3 class=\"ds-card-title\">Course Module</h3><p class=\"ds-card-body\">Introduction to data fetching patterns in modern web frameworks.</p></div>",
+      "css": ".ds-card { background: #ffffff; border: 1px solid #ece8e1; border-radius: 12px; box-shadow: 0 1px 2px rgba(26, 19, 16, 0.04); padding: 24px; } .ds-card-title { font-family: 'Sora', sans-serif; font-size: 1.125rem; font-weight: 700; letter-spacing: -0.025em; line-height: 1.2; color: #1a1310; margin: 0 0 8px 0; } .ds-card-body { font-family: 'Source Serif 4', Georgia, serif; font-size: 1rem; line-height: 1.7; color: #564538; margin: 0; }"
+    },
+    {
+      "name": "Navigation Bar",
+      "kind": "nav",
+      "refersTo": "nav-bar",
+      "description": "Fixed top navigation with backdrop blur over scrolled content.",
+      "html": "<nav class=\"ds-nav\"><span class=\"ds-nav-brand\">LearnFlow</span><a class=\"ds-nav-link\" href=\"#\">How it works</a><a class=\"ds-nav-link\" href=\"#\">Features</a><button class=\"ds-btn-primary\" style=\"height:32px;font-size:0.8rem;\">Get started</button></nav>",
+      "css": ".ds-nav { display: flex; align-items: center; gap: 24px; height: 64px; padding: 0 60px; background: rgba(250, 249, 245, 0.8); backdrop-filter: blur(12px); border-bottom: 1px solid #ece8e1; } .ds-nav-brand { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 1.125rem; color: #1a1310; letter-spacing: -0.025em; } .ds-nav-link { font-family: 'Source Serif 4', Georgia, serif; font-size: 0.875rem; color: #564538; text-decoration: none; padding: 4px 8px; border-radius: 8px; transition: all 200ms ease-in; } .ds-nav-link:hover { background: #f3f1eb; color: #1a1310; }"
+    },
+    {
+      "name": "Mono Label",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "Technical label used for step indicators, metadata, and pipeline annotations.",
+      "html": "<span class=\"ds-label\">STEP_01</span>",
+      "css": ".ds-label { font-family: 'JetBrains Mono', 'SF Mono', monospace; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #7a6b5d; }"
+    },
+    {
+      "name": "Command Bar",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "LearnFlow's signature CTA: a command-line-styled input that asks 'What do you want to learn?'",
+      "html": "<div class=\"ds-cmdbar\"><span class=\"ds-cmdbar-prompt\">What do you want to learn?</span><span class=\"ds-cmdbar-cursor\"></span><button class=\"ds-cmdbar-submit\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M5 12h14M12 5l7 7-7 7\"/></svg></button></div>",
+      "css": ".ds-cmdbar { display: flex; align-items: center; gap: 12px; background: #1a1310; color: #f5f0ea; padding: 16px 24px; border-radius: 12px; box-shadow: 0 8px 36px rgba(26, 19, 16, 0.22); font-family: 'Source Serif 4', Georgia, serif; font-size: 1rem; } .ds-cmdbar-prompt { color: #a99e92; flex: 1; } .ds-cmdbar-cursor { width: 2px; height: 1.2em; background: #e8571a; animation: ds-blink 1s step-end infinite; } @keyframes ds-blink { 50% { opacity: 0; } } .ds-cmdbar-submit { background: #e8571a; color: #ffffff; border: none; border-radius: 8px; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 200ms ease-in; } .ds-cmdbar-submit:hover { background: #d44e15; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Ember Curriculum",
+    "overview": "Knowledge as a glowing ember you tend and grow. LearnFlow's design system channels warmth that builds into something powerful: earthy tones ground the learner, the singular ember accent ignites action without shouting, and a serif-forward reading experience signals substance over spectacle. The system is lightly layered, quietly precise, and never generic.\n\nThis is not another SaaS landing page with gradient blobs and \"powered by AI\" badges. It is not a course marketplace drowning in discount banners and card grids. It is not sterile institutional e-learning. LearnFlow looks like it was built by people who care about learning, not people who care about looking like an AI startup.",
+    "keyCharacteristics": [
+      "Warm, tinted neutrals drawn from an espresso scale; never pure black or pure white",
+      "A single ember accent used with restraint and purpose",
+      "Serif body text for reading comfort; geometric sans display for authority; monospace labels for technical credibility",
+      "Lightly layered surfaces with warm-tinted shadows",
+      "Quietly precise interactions: every click feels deliberate and responsive",
+      "Generous whitespace with varied rhythm, never monotonous padding"
+    ],
+    "rules": [
+      { "name": "The Ember Scarcity Rule", "body": "Ember appears on no more than 10% of any given screen. Its power comes from restraint. If you're reaching for ember on a third element, one of the first two is wrong.", "section": "colors" },
+      { "name": "The No Pure Black Rule", "body": "Every dark value is tinted toward the espresso hue. #000 and #fff are forbidden. The warmest value is the truest value.", "section": "colors" },
+      { "name": "The Three Voices Rule", "body": "Never use more than three typefaces on a single screen. Sora for authority, Source Serif 4 for comfort, JetBrains Mono for precision.", "section": "typography" },
+      { "name": "The Warm Shadow Rule", "body": "Every shadow uses espresso-derived RGBA, never rgba(0,0,0,...). Shadows are warm light, not absence of light.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do tint every neutral toward espresso. Even the lightest gray should feel warm when placed next to pure white.",
+      "Do use the .mono-space utility for technical labels, step indicators, and metadata. Uppercase, 0.7rem, 0.08em tracking.",
+      "Do use the .display-text utility for hero headlines. Sora, 700 weight, -0.035em tracking.",
+      "Do vary spacing for rhythm. Sections breathe differently.",
+      "Do use warm-tinted shadows (espresso RGBA) for all elevation.",
+      "Do cap body text at 65-75ch line length for reading comfort.",
+      "Do use Source Serif 4 for any paragraph-length content."
+    ],
+    "donts": [
+      "Don't use #000 or #fff anywhere. Every value is tinted.",
+      "Don't use identical card grids (same-sized cards with icon + heading + text, repeated endlessly).",
+      "Don't use gradient text (background-clip: text with gradients).",
+      "Don't use side-stripe borders (border-left or border-right > 1px as colored accents).",
+      "Don't build hero-metric templates (big number, small label, gradient accent).",
+      "Don't use glassmorphism decoratively.",
+      "Don't make it look like a generic course marketplace.",
+      "Don't make it look like a cookie-cutter AI startup.",
+      "Don't use bounce or elastic easing.",
+      "Don't animate CSS layout properties.",
+      "Don't use modals as a first thought."
+    ]
+  }
+}

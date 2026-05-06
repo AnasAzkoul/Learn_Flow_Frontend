@@ -21,7 +21,28 @@ const props = withDefaults(defineProps<Props>(), {
 </script>
 
 <template>
+  <NuxtLink
+    v-if="to"
+    :to="to"
+    data-slot="button"
+    :data-variant="variant"
+    :data-size="size"
+    :class="cn(buttonVariants({ variant, size }), props.class)"
+  >
+    <slot />
+  </NuxtLink>
+  <a
+    v-else-if="href"
+    :href="href"
+    data-slot="button"
+    :data-variant="variant"
+    :data-size="size"
+    :class="cn(buttonVariants({ variant, size }), props.class)"
+  >
+    <slot />
+  </a>
   <Primitive
+    v-else
     data-slot="button"
     :data-variant="variant"
     :data-size="size"
@@ -29,15 +50,6 @@ const props = withDefaults(defineProps<Props>(), {
     :as-child="asChild"
     :class="cn(buttonVariants({ variant, size }), props.class)"
   >
-    <NuxtLink
-      v-if="to"
-      :to="to"
-    >
-      <slot />
-    </NuxtLink>
-    <a v-else-if="href">
-      <slot />
-    </a>
-    <slot v-else />
+    <slot />
   </Primitive>
 </template>
