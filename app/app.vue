@@ -1,9 +1,10 @@
-<script setup lang="ts">
-import AppLogo from '@/components/layout/AppLogo/AppLogo.vue';
+<script lang="ts" setup>
+import { Toaster as Sonner } from '@/components/ui/sonner'
 </script>
 
 <template>
   <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>
+  <Sonner />
 </template>

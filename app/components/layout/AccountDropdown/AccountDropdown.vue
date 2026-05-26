@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import type {UserDropdownItem} from "~/components/layout/AccountDropdown/index";
 import {Avatar, AvatarFallback, AvatarImage} from "~/components/ui/avatar";
 import {
   DropdownMenu,
@@ -8,6 +7,12 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator, DropdownMenuTrigger
 } from "~/components/ui/dropdown-menu";
+
+interface UserDropdownItem {
+    label: string;
+    href?: string;
+    onClick?: () => void;
+}
 
 const userDropdownItems: UserDropdownItem[] = [
   { label: "Profile", href: "/profile" },

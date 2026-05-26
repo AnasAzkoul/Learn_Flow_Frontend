@@ -7,7 +7,7 @@ const props = defineProps<{
 
 // Reactive colors
 const stroke = computed(() => props.active ? '#e8571a' : '#6b7385');
-const dim = computed(() => props.active ? '#9aa1b1' : '#2e353f');
+const dim = computed(() => props.active ? '#9aa1b1' : '#4a5264');
 const ink = '#eef0f4';
 
 // Dimensions — large wave cropped tighter (content spans ~y10 to y155)
