@@ -1,5 +1,7 @@
-export const useAuthSession = () => {
-  const { $api } = useNuxtApp();
+import { useAuthStore } from "~/stores/useAuthStore";
 
-  return useAsyncData("auth-session", () => $api.auth.getSession());
+export const useAuthSession = () => {
+  const authStore = useAuthStore();
+
+  return useAsyncData("auth-session", () => authStore.refreshSession());
 };

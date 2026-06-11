@@ -25,11 +25,16 @@ withDefaults(
       isInputGroup?: boolean;
       type?: string;
       className?: string;
-      label: string;
+      label?: string;
       autoComplete?: string;
     }>(),
     {
+      autoComplete: undefined,
+      className: undefined,
+      description: undefined,
       isInputGroup: false,
+      label: undefined,
+      rules: undefined,
       type: "text",
     },
 );
@@ -47,6 +52,7 @@ const showPassword = ref(false);
       :data-invalid="!!errors.length"
     >
       <FieldLabel
+        v-if="label"
         :for="name"
         class="capitalize mono-space text-text-muted"
       >

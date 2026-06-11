@@ -7,15 +7,39 @@ import {
   FieldLabel,
 } from "../../ui/field";
 import {Field as VeeField} from "vee-validate";
-import {CalendarDate, getLocalTimeZone, today, type DateValue} from '@internationalized/date'
+import {CalendarDate, getLocalTimeZone, parseDate, today, type DateValue} from '@internationalized/date'
 import {Calendar} from '@/components/ui/calendar'
 import {CalendarIcon} from "lucide-vue-next";
 import {Popover, PopoverContent, PopoverTrigger} from "~/components/ui/popover";
 import {Button} from "~/components/ui/button";
 
 const maxDate = ref(today(getLocalTimeZone())) as Ref<CalendarDate>
-const date = ref<DateValue>()
 const isOpen = ref(false)
+
+const toCalendarDate = (value: unknown): DateValue | undefined => {
+  if (typeof value !== "string" || !value) return undefined
+
+  try {
+    return parseDate(value)
+  } catch {
+    return undefined
+  }
+}
+
+const formatDate = (value: unknown) => {
+  const parsedDate = toCalendarDate(value)
+  return parsedDate ? parsedDate.toDate(getLocalTimeZone()).toLocaleDateString() : "Select date"
+}
+
+const handleDateChange = (
+    value: DateValue | undefined,
+    handleChange: (value: string) => void,
+) => {
+  if (!value) return
+
+  handleChange(value.toString())
+  isOpen.value = false
+}
 
 interface Props {
   name: string;
@@ -30,7 +54,7 @@ defineProps<Props>();
 
 <template>
   <VeeField
-    v-slot="{ field, errors }"
+    v-slot="{ value, errors, handleChange }"
     :name="name"
     :rules="rules"
   >
@@ -47,27 +71,23 @@ defineProps<Props>();
       <Popover v-model:open="isOpen">
         <PopoverTrigger as-child>
           <Button
-            id="date"
+            :id="name"
             class="w-48 justify-between font-normal"
+            type="button"
             variant="outline"
           >
             <CalendarIcon class="mr-2 size-4 shrink-0" />
-            {{ date ? date.toDate(getLocalTimeZone()).toLocaleDateString() : "Select date" }}
+            {{ formatDate(value) }}
           </Button>
         </PopoverTrigger>
         <PopoverContent align="start" class="w-auto p-0">
           <Calendar
             :max-value="maxDate"
             :min-value="new CalendarDate(1925, 1, 1)"
-            :model-value="date"
+            :model-value="toCalendarDate(value)"
             initial-focus
             layout="month-and-year"
-            @update:model-value="(val: DateValue | undefined) => {
-              if (!val) return
-              date = val
-              field.value = val.toString()
-              isOpen = false
-            }"
+            @update:model-value="(val: DateValue | undefined) => handleDateChange(val, handleChange)"
           />
         </PopoverContent>
       </Popover>

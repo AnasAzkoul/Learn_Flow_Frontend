@@ -1,8 +1,9 @@
 import {useForm} from "vee-validate";
 import {useRouter} from "vue-router";
-import {watch} from "vue";
-// import {useUserStore} from "../../../stores/useUserStore.ts";
+import {computed, watch} from "vue";
+import {storeToRefs} from "pinia";
 import {signupSchema} from "~/pages/Signup/config";
+import {useAuthStore} from "~/stores/useAuthStore";
 
 export const useSignup = () => {
     const {
@@ -33,8 +34,8 @@ export const useSignup = () => {
         defineField("termsAndConditions");
 
     const router = useRouter();
-    // const userStore = useUserStore();
-    // const authError = computed(() => userStore.errorMessage);
+    const authStore = useAuthStore();
+    const {error: authError, isLoading} = storeToRefs(authStore);
 
     watch(
         () => [
@@ -50,9 +51,7 @@ export const useSignup = () => {
             values.termsAndConditions,
         ],
         () => {
-            // if (userStore.isError) {
-            //     userStore.resetErrorState();
-            // }
+            authStore.resetError();
         },
     );
 
@@ -62,15 +61,17 @@ export const useSignup = () => {
             return;
         }
 
-        // const result = await userStore.signupUser(values);
-
-        // if (!result.success) {
-        //     toast.error(result.error.message);
-        //     return;
-        // }
-
-        console.log(values, "successful signup")
-
+        await authStore.signup({
+            fullName: values.fullName ?? "",
+            email: values.email,
+            occupation: values.occupation,
+            birthDate: values.birthDate,
+            gender: values.gender,
+            educationalLevel: values.educationalLevel,
+            learningStyle: values.learningStyle,
+            password: values.password,
+            termsAndConditions: values.termsAndConditions,
+        });
         handleReset();
         await router.push({name: "newCourse"});
     });
@@ -79,8 +80,8 @@ export const useSignup = () => {
         termsAndConditions,
         termsAndConditionsAttrs,
         errors,
-        isSubmitting,
+        isSubmitting: computed(() => isSubmitting.value || isLoading.value),
         onSubmit,
-        // authError,
+        authError,
     };
 };

@@ -1,7 +1,8 @@
 <script lang="ts" setup>
 import {ref, onMounted} from 'vue'
-import {ArrowRight, Loader2} from 'lucide-vue-next'
+import {AlertCircle, ArrowRight, Loader2} from 'lucide-vue-next'
 import {Button} from '@/components/ui/button'
+import {Alert, AlertDescription} from '@/components/ui/alert'
 import AppLogo from '@/components/layout/AppLogo/AppLogo.vue'
 import SectionDivider from '@/components/common/SectionDivider.vue'
 import BaseCalendarInput from "~/components/common/BaseCalendar/BaseCalendarInput.vue";
@@ -12,6 +13,7 @@ import BaseCheckbox from "~/components/common/BaseCheckbox/BaseCheckbox.vue";
 import {useSignup} from './useSignup';
 
 definePageMeta({layout: 'auth'})
+defineOptions({name: 'SignupPage'})
 
 const mounted = ref(false)
 
@@ -21,7 +23,7 @@ onMounted(() => {
   })
 })
 
-const {onSubmit, isSubmitting, errors} = useSignup()
+const {onSubmit, isSubmitting, errors, authError} = useSignup()
 </script>
 
 <template>
@@ -54,6 +56,15 @@ const {onSubmit, isSubmitting, errors} = useSignup()
         class="space-y-5"
         @submit.prevent="onSubmit"
       >
+        <Alert
+          v-if="authError"
+          class="signup-stagger-3"
+          variant="destructive"
+        >
+          <AlertCircle />
+          <AlertDescription>{{ authError.message }}</AlertDescription>
+        </Alert>
+
         <!-- Profile Section -->
         <div class="signup-stagger-3">
           <SectionDivider label="Profile" />

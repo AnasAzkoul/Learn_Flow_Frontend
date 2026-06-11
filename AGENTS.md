@@ -57,6 +57,7 @@ app/
 - Use `cn()` from `@/lib/utils` for conditional class merging
 - Tailwind v4 uses CSS-based config (no tailwind.config.ts)
 - Dark mode via `.dark` class variant
+- Pinia stores must use setup-store / Composition API style; do not use Options API stores for new or refactored store code
 - Page-level composables colocated with page: `useLogin.ts`, `useSignup.ts`
 - Page-level config/constants colocated with page: `config.ts`
 - Feature components organized by domain under `components/features/`
