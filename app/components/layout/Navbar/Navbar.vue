@@ -16,6 +16,8 @@ interface NavAction {
   to: string;
 }
 
+defineOptions({name: 'AppNavbar'});
+
 const props = withDefaults(defineProps<{
   links?: NavLink[];
   actions?: NavAction[];
@@ -131,6 +133,7 @@ function closeMobile() {
               <Button
                 v-for="action in actions"
                 :key="action.label"
+                :to="action.to"
                 :variant="action.variant"
                 class="w-full font-display"
                 size="lg"

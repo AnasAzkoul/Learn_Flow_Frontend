@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+definePageMeta({layout: 'default', middleware: 'auth'})
+defineOptions({name: 'DashboardPage'})
 </script>
 
 <template>

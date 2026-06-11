@@ -9,7 +9,7 @@ import BaseInput from "~/components/common/BaseInput/BaseInput.vue";
 
 import {useLogin} from './useLogin';
 
-definePageMeta({layout: 'auth'})
+definePageMeta({layout: 'auth', middleware: 'guest'})
 defineOptions({name: 'LoginPage'})
 
 const mounted = ref(false)

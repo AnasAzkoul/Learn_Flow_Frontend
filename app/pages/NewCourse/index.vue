@@ -13,7 +13,8 @@ import {
 import {useNewCourse} from './useNewCourse'
 import {knowledgeLevels, courseDepths, lessonTypes} from './config'
 
-definePageMeta({layout: 'default', path: '/new-course'})
+definePageMeta({layout: 'default', middleware: 'auth', path: '/new-course'})
+defineOptions({name: 'NewCoursePage'})
 
 const mounted = ref(false)
 onMounted(() => {

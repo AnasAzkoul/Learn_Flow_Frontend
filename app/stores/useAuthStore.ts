@@ -90,9 +90,29 @@ export const useAuthStore = defineStore("auth", () => {
 
       return nextSession;
     } catch (nextError) {
+      const normalizedError = normalizeApiError(nextError);
+
       hasLoadedSession.value = true;
-      setError(nextError);
-      throw normalizeApiError(nextError);
+
+      if (normalizedError.status === 401 || normalizedError.status === 403) {
+        setSession(null);
+      } else {
+        setError(normalizedError);
+      }
+
+      throw normalizedError;
+    }
+  }
+
+  async function ensureSessionLoaded(): Promise<AuthSession | null> {
+    if (hasLoadedSession.value) {
+      return session.value;
+    }
+
+    try {
+      return await refreshSession();
+    } catch {
+      return session.value;
     }
   }
 
@@ -157,6 +177,7 @@ export const useAuthStore = defineStore("auth", () => {
     isError,
     displayName,
     userInitials,
+    ensureSessionLoaded,
     refreshSession,
     login,
     signup,

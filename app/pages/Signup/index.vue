@@ -12,7 +12,7 @@ import BaseCheckbox from "~/components/common/BaseCheckbox/BaseCheckbox.vue";
 
 import {useSignup} from './useSignup';
 
-definePageMeta({layout: 'auth'})
+definePageMeta({layout: 'auth', middleware: 'guest'})
 defineOptions({name: 'SignupPage'})
 
 const mounted = ref(false)

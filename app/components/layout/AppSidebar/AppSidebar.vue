@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import {computed} from 'vue'
+import {storeToRefs} from 'pinia'
 import {
   Search,
   Sparkles,
@@ -34,8 +36,13 @@ import {
 } from '@/components/ui/dropdown-menu'
 import {Avatar, AvatarFallback, AvatarImage} from '@/components/ui/avatar'
 import LogoMark from '@/components/layout/AppLogo/LogoMark.vue'
+import {useAuthStore} from '~/stores/useAuthStore'
 
 const {state} = useSidebar()
+const authStore = useAuthStore()
+const {user, displayName, userInitials, isLoading} = storeToRefs(authStore)
+const {signOutAndRedirect} = useAuthSignOut()
+const userEmail = computed(() => user.value?.email ?? '')
 
 const navItems = [
   {label: 'Search', icon: Search, href: '#'},
@@ -156,14 +163,14 @@ const route = useRoute()
             <DropdownMenuTrigger as-child>
               <SidebarMenuButton size="lg" class="cursor-pointer">
                 <Avatar class="size-7 shrink-0">
-                  <AvatarImage src="" alt="User" />
+                  <AvatarImage :src="user?.image ?? ''" alt="User" />
                   <AvatarFallback class="bg-sidebar-accent text-sidebar-foreground text-xs font-medium">
-                    AA
+                    {{ userInitials }}
                   </AvatarFallback>
                 </Avatar>
                 <div class="flex flex-col gap-0.5 overflow-hidden min-w-0">
-                  <span class="text-[13px] font-medium tracking-tight truncate">Anas Azkoul</span>
-                  <span class="text-[11px] text-sidebar-foreground/50 font-mono truncate">anas.azkoul@gmail.com</span>
+                  <span class="text-[13px] font-medium tracking-tight truncate">{{ displayName }}</span>
+                  <span class="text-[11px] text-sidebar-foreground/50 font-mono truncate">{{ userEmail }}</span>
                 </div>
                 <ChevronsUpDown class="ml-auto size-4 shrink-0 opacity-50" />
               </SidebarMenuButton>
@@ -174,7 +181,11 @@ const route = useRoute()
                 Settings
               </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem class="gap-2 font-display text-[13px]">
+              <DropdownMenuItem
+                :disabled="isLoading"
+                class="gap-2 font-display text-[13px]"
+                @select="signOutAndRedirect"
+              >
                 <LogOut :size="16" />
                 Sign out
               </DropdownMenuItem>

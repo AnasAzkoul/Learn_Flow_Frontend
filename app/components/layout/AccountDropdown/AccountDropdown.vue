@@ -1,36 +1,39 @@
 <script setup lang="ts">
+import {storeToRefs} from "pinia";
+import {LogOut} from "lucide-vue-next";
 import {Avatar, AvatarFallback, AvatarImage} from "~/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuSeparator, DropdownMenuTrigger
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
+import {useAuthStore} from "~/stores/useAuthStore";
 
 interface UserDropdownItem {
     label: string;
-    href?: string;
-    onClick?: () => void;
+    href: string;
 }
 
 const userDropdownItems: UserDropdownItem[] = [
   { label: "Profile", href: "/profile" },
   { label: "Billing", href: "/billing" },
   { label: "Subscription", href: "/subscription" },
-  { label: "Logout", onClick: handleLogout },
 ]
 
-function handleLogout() {
-}
+const authStore = useAuthStore();
+const {user, userInitials, isLoading} = storeToRefs(authStore);
+const {signOutAndRedirect} = useAuthSignOut();
 </script>
 
 <template>
   <DropdownMenu>
     <DropdownMenuTrigger>
       <Avatar>
-        <AvatarImage src="https://github.com/shadcn.png" />
-        <AvatarFallback>CN</AvatarFallback>
+        <AvatarImage :src="user?.image ?? ''" />
+        <AvatarFallback>{{ userInitials }}</AvatarFallback>
       </Avatar>
     </DropdownMenuTrigger>
     <DropdownMenuContent
@@ -42,17 +45,20 @@ function handleLogout() {
       <DropdownMenuItem
         v-for="item in userDropdownItems"
         :key="item.label"
-        :class="item.label === 'Logout' ? 'focus:bg-destructive' : ''"
+        as-child
       >
-        <Button
-          :variant="item.label === 'Logout' ? 'destructive' : 'ghost'"
-          class="pl-0 pb-0 w-full"
-          size="sm"
-          :to="item.href"
-          @click="item.onClick"
-        >
+        <NuxtLink :to="item.href" class="w-full">
           {{ item.label }}
-        </Button>
+        </NuxtLink>
+      </DropdownMenuItem>
+      <DropdownMenuSeparator />
+      <DropdownMenuItem
+        :disabled="isLoading"
+        variant="destructive"
+        @select="signOutAndRedirect"
+      >
+        <LogOut :size="16" />
+        Sign out
       </DropdownMenuItem>
     </DropdownMenuContent>
   </DropdownMenu>

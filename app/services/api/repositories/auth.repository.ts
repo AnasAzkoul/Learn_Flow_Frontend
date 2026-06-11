@@ -59,6 +59,7 @@ export const createAuthRepository = (apiFetch: ApiFetch) => ({
   async signOut(): Promise<void> {
     await apiFetch<{ success: boolean }>("/auth/sign-out", {
       method: "POST",
+      body: {},
     });
   },
 });

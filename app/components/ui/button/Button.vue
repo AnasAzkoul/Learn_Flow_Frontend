@@ -18,6 +18,10 @@ interface Props extends PrimitiveProps {
 const props = withDefaults(defineProps<Props>(), {
   as: "button",
 });
+
+defineOptions({
+  inheritAttrs: false,
+});
 </script>
 
 <template>
@@ -28,6 +32,7 @@ const props = withDefaults(defineProps<Props>(), {
     :data-variant="variant"
     :data-size="size"
     :class="cn(buttonVariants({ variant, size }), props.class)"
+    v-bind="$attrs"
   >
     <slot />
   </NuxtLink>
@@ -38,6 +43,7 @@ const props = withDefaults(defineProps<Props>(), {
     :data-variant="variant"
     :data-size="size"
     :class="cn(buttonVariants({ variant, size }), props.class)"
+    v-bind="$attrs"
   >
     <slot />
   </a>
@@ -49,6 +55,7 @@ const props = withDefaults(defineProps<Props>(), {
     :as="as"
     :as-child="asChild"
     :class="cn(buttonVariants({ variant, size }), props.class)"
+    v-bind="$attrs"
   >
     <slot />
   </Primitive>
